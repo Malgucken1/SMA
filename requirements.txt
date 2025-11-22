@@ -1,9 +1,9 @@
 streamlit
 langchain
 langchain-openai
-langchain_community
+langchain-community
 langgraph
 pandas
-chroma-langchain
+chromadb
 python-dotenv
 pydantic
