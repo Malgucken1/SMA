@@ -73,13 +73,8 @@ with st.sidebar:
 def initialize_rag_system():
     
     # 1. CSV Laden & Bereinigen
-    try:
-        # Versucht, die CSV-Datei zu laden
-        df = pd.read_csv("nasdaq_100_final_for_RAG.csv")
-    except FileNotFoundError:
-        # Fehlermeldung, falls Datei fehlt
-        st.error("Die Datei 'nasdaq_100_final_for_RAG.csv' wurde nicht gefunden.")
-        st.stop()
+    # Lädt die CSV-Datei direkt (wir gehen davon aus, dass sie da ist)
+    df = pd.read_csv("nasdaq_100_final_for_RAG.csv")
 
     # Entfernt die Spalte 'PEG Ratio', falls sie existiert (wie im Notebook)
     if "PEG Ratio" in df.columns:
@@ -310,22 +305,17 @@ if prompt := st.chat_input("Stelle ein Frage z.B. analysiere Apple"):
     # Führt die KI-Logik aus
     with st.chat_message("assistant"):
         with st.spinner("Analysiere..."): # Zeigt Lade-Animation
-            try:
-                # Baut den Input für den Graphen
-                inputs = {"input": prompt, "chat_history": history_langchain}
-                
-                # Ruft den LangGraph auf (.invoke startet den Workflow)
-                result = rag_app.invoke(inputs)
-                
-                # Holt die Antwort aus dem Ergebnis
-                answer_text = result["answer"]
-                
-                # Zeigt die Antwort an
-                st.markdown(answer_text)
-                
-                # Speichert die Antwort im Session State Verlauf
-                st.session_state.messages.append({"role": "assistant", "content": answer_text})
-                
-            except Exception as e:
-                # Fehlerbehandlung, falls etwas schief geht
-                st.error(f"Fehler: {e}")
+            # Baut den Input für den Graphen
+            inputs = {"input": prompt, "chat_history": history_langchain}
+            
+            # Ruft den LangGraph auf (.invoke startet den Workflow)
+            result = rag_app.invoke(inputs)
+            
+            # Holt die Antwort aus dem Ergebnis
+            answer_text = result["answer"]
+            
+            # Zeigt die Antwort an
+            st.markdown(answer_text)
+            
+            # Speichert die Antwort im Session State Verlauf
+            st.session_state.messages.append({"role": "assistant", "content": answer_text})
