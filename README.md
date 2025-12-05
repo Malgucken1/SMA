@@ -2,6 +2,8 @@
 
 Dieses Projekt ist eine interaktive **Streamlit-Webanwendung**, die einen hochentwickelten **RAG (Retrieval-Augmented Generation) Chatbot** bereitstellt. Der Bot agiert als spezialisierter Finanzanalyst und beantwortet Fragen basierend auf aktuellen und historischen Finanzdaten der Unternehmen des **Nasdaq 100 Index**.
 
+Link: https://schelki.streamlit.app/
+
 Die gesamte Logik des Chatbots wird durch den **LangGraph**-State-Machine-Ansatz gesteuert, um einen präzisen, mehrstufigen Analyseprozess zu gewährleisten.
 
 ## 🌟 Funktionen und Anwendungsfall
